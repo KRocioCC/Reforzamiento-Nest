@@ -32,7 +32,9 @@ export class ProductsService {
     return { message: `Product #${id} updated`, data: updateProductDto };
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  remove(id: string): Product {
+    const product = this.findOne(id);
+    this.products = this.products.filter((product) => product.id !== id);
+    return product;
   }
 }
