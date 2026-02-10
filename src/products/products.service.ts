@@ -28,8 +28,15 @@ export class ProductsService {
     return product;
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return { message: `Product #${id} updated`, data: updateProductDto };
+  update(id: string, updateProductDto: UpdateProductDto) {
+    const { name, description, price } = updateProductDto;
+    const product = this.findOne(id);
+    product.updateWith({
+      name: name as string,
+      description: description as string,
+      price: price as number,
+    });
+    return product;
   }
 
   remove(id: string): Product {
